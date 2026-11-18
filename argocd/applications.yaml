@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: capstone-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/aatikah/TechWay-Platform-with-Monitoring-GitOps.git
+    targetRevision: main
+    path: overlays/staging
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: capstone-staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: capstone-production
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/aatikah/TechWay-Platform-with-Monitoring-GitOps.git
+    targetRevision: main
+    path: overlays/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: capstone-production
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

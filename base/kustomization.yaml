@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - gateway.yaml
+  - user.yaml
+  - product.yaml
+  - order.yaml
+  - notification.yaml
+images:
+  - name: gateway-service
+    newName: gateway-service
+    newTag: dev
+  - name: user-service
+    newName: user-service
+    newTag: dev
+  - name: product-service
+    newName: product-service
+    newTag: dev
+  - name: order-service
+    newName: order-service
+    newTag: dev
+  - name: notification-service
+    newName: notification-service
+    newTag: dev
